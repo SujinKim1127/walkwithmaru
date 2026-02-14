@@ -11,17 +11,31 @@ interface UnavailableDateRecorderProps {
 const UnavailableDateRecorder = ({
   selectedDate,
 }: UnavailableDateRecorderProps) => {
-  const handleRecord = async (name: string) => {
+  const handleToggle = async (name: string) => {
     const dateString = selectedDate.toDateString();
 
     try {
-      await dbService.collection("unavailable").add({
-        day: dateString,
-        name,
-        createdAt: new Date().toISOString(),
-      });
+      const snapshot = await dbService
+        .collection("unavailable")
+        .where("day", "==", dateString)
+        .where("name", "==", name)
+        .get();
+
+      if (!snapshot.empty) {
+        const batch = dbService.batch();
+        snapshot.docs.forEach((doc) => {
+          batch.delete(doc.ref);
+        });
+        await batch.commit();
+      } else {
+        await dbService.collection("unavailable").add({
+          day: dateString,
+          name,
+          createdAt: new Date().toISOString(),
+        });
+      }
     } catch (error) {
-      console.error("🔥 기록 실패:", error);
+      console.error("🔥 토글 실패:", error);
     }
   };
 
@@ -29,10 +43,10 @@ const UnavailableDateRecorder = ({
     <Container>
       <Label>안되는 날짜 기록</Label>
       <ButtonGroup>
-        <RecordButton bgColor={brown} onClick={() => handleRecord("지은")}>
+        <RecordButton bgColor={brown} onClick={() => handleToggle("지은")}>
           지은
         </RecordButton>
-        <RecordButton bgColor={yellow} onClick={() => handleRecord("수진")}>
+        <RecordButton bgColor={yellow} onClick={() => handleToggle("수진")}>
           수진
         </RecordButton>
       </ButtonGroup>

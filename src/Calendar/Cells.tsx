@@ -22,6 +22,7 @@ export interface CProps {
   selectedDate: Date;
   onDateClick: any;
   schedule: any;
+  unavailableData: any;
 }
 
 const Cells = ({
@@ -29,6 +30,7 @@ const Cells = ({
   selectedDate,
   onDateClick,
   schedule,
+  unavailableData,
 }: CProps) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
@@ -64,10 +66,10 @@ const Cells = ({
                       !isSameDay(day, selectedDate)
                         ? "none"
                         : isSameDay(day, selectedDate)
-                        ? "select"
-                        : format(currentMonth, "M") !== format(day, "M")
-                        ? "not-valid"
-                        : "valid"
+                          ? "select"
+                          : format(currentMonth, "M") !== format(day, "M")
+                            ? "not-valid"
+                            : "valid"
                     }`}
             onClick={() => {
               onDateClick(cloneDay);
@@ -79,74 +81,74 @@ const Cells = ({
               format(currentMonth, "M") !== format(day, "M")
                 ? "text not-valid"
                 : !isSameDay(day, selectedDate)
-                ? "none"
-                : isSameDay(day, selectedDate)
-                ? "textselect"
-                : ""
+                  ? "none"
+                  : isSameDay(day, selectedDate)
+                    ? "textselect"
+                    : ""
             }`}
             >
               {formatDate}
             </span>
-            <Square>
-              {data.indexOf(string) !== -1 ? (
-                <>
-                  {" "}
-                  {schedule.map((el: any) => {
-                    return (
-                      <>
-                        {string === el.day ? (
-                          el.time === "even" ? (
-                            <Evening
-                              name={el.name}
-                              className={
-                                format(currentMonth, "M") !== format(day, "M")
-                                  ? "text not-valid"
-                                  : ""
-                              }
-                            ></Evening>
-                          ) : el.time === "morn" ? (
-                            <Morning
-                              name={el.name}
-                              className={
-                                format(currentMonth, "M") !== format(day, "M")
-                                  ? "text not-valid"
-                                  : ""
-                              }
-                            ></Morning>
+            <IndicatorRow>
+              <Square>
+                {data.indexOf(string) !== -1 ? (
+                  <>
+                    {schedule.map((el: any) => {
+                      return (
+                        <>
+                          {string === el.day ? (
+                            el.time === "even" ? (
+                              <Evening
+                                name={el.name}
+                                className={
+                                  format(currentMonth, "M") !== format(day, "M")
+                                    ? "text not-valid"
+                                    : ""
+                                }
+                              ></Evening>
+                            ) : el.time === "morn" ? (
+                              <Morning
+                                name={el.name}
+                                className={
+                                  format(currentMonth, "M") !== format(day, "M")
+                                    ? "text not-valid"
+                                    : ""
+                                }
+                              ></Morning>
+                            ) : (
+                              ""
+                            )
                           ) : (
                             ""
-                          )
-                        ) : (
-                          ""
-                        )}
-                      </>
-                    );
-                  })}
-                </>
-              ) : (
-                ""
-                // <>
-                //   <Morning
-                //     name="gray"
-                //     className={
-                //       format(currentMonth, "M") !== format(day, "M")
-                //         ? "text not-valid"
-                //         : ""
-                //     }
-                //   ></Morning>
-                //   <Evening
-                //     name="gray"
-                //     className={
-                //       format(currentMonth, "M") !== format(day, "M")
-                //         ? "text not-valid"
-                //         : ""
-                //     }
-                //   ></Evening>
-                // </>
-              )}
-            </Square>
+                          )}
+                        </>
+                      );
+                    })}
+                  </>
+                ) : (
+                  ""
+                )}
+              </Square>
+              <XMarkColumn>
+                {unavailableData
+                  .filter((el: any) => el.day === string)
+                  .map((el: any) => (
+                    <XMark
+                      key={el.id}
+                      name={el.name}
+                      className={
+                        format(currentMonth, "M") !== format(day, "M")
+                          ? "text not-valid"
+                          : ""
+                      }
+                    >
+                      ✕
+                    </XMark>
+                  ))}
+              </XMarkColumn>
+            </IndicatorRow>
           </CellBox>
-        </Container>
+        </Container>,
       );
       day = addDays(day, 1);
     }
@@ -195,11 +197,37 @@ const RowBox = styled.div`
   margin-bottom: 5px;
 `;
 
+const IndicatorRow = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin: 2px auto;
+`;
+
 const Square = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 2px auto;
+`;
+
+const XMarkColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+`;
+
+const XMark = styled.div<UserColor>`
+  font-size: 8px;
+  font-weight: 900;
+  line-height: 8px;
+  width: 10px;
+  height: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${(props) =>
+    props.name === "수진" ? yellow : props.name === "지은" ? brown : "gray"};
 `;
 
 const Morning = styled.div<UserColor>`
@@ -210,12 +238,12 @@ const Morning = styled.div<UserColor>`
     props.name === "수진"
       ? yellow
       : props.name === "태훈"
-      ? green
-      : props.name === "유정"
-      ? sky
-      : props.name === "지은"
-      ? brown
-      : "gray"};
+        ? green
+        : props.name === "유정"
+          ? sky
+          : props.name === "지은"
+            ? brown
+            : "gray"};
 `;
 
 const Evening = styled.div<UserColor>`
@@ -226,12 +254,12 @@ const Evening = styled.div<UserColor>`
     props.name === "수진"
       ? yellow
       : props.name === "태훈"
-      ? green
-      : props.name === "유정"
-      ? sky
-      : props.name === "지은"
-      ? brown
-      : "gray"};
+        ? green
+        : props.name === "유정"
+          ? sky
+          : props.name === "지은"
+            ? brown
+            : "gray"};
 `;
 
 const Body = styled.div`

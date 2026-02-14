@@ -220,11 +220,11 @@ const XMarkColumn = styled.div`
 `;
 
 const XMark = styled.div<UserColor>`
-  font-size: 8px;
-  font-weight: 1000;
-  line-height: 8px;
-  width: 10px;
-  height: 8px;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 11px;
+  width: 12px;
+  height: 11px;
   display: flex;
   align-items: center;
   justify-content: center;

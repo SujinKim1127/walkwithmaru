@@ -47,7 +47,11 @@ const Calendar = ({
   return (
     <Container>
       <WholeBox>
-        <Header currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} />
+        <Header
+          currentMonth={currentMonth}
+          setCurrentMonth={setCurrentMonth}
+          schedule={schedule}
+        />
         <Days />
         <Cells
           currentMonth={currentMonth}

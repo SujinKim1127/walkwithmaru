@@ -61,8 +61,6 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  background-color: #f7f7f8;
-  border-radius: 12px;
   padding: 10px 16px;
 `;
 

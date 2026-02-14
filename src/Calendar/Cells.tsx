@@ -174,14 +174,15 @@ const Container = styled.div`
     font-weight: 700;
   }
   .textselect {
-    color: white;
-    background-color: blue;
-    border-radius: 5px;
+    color: blue;
+    font-weight: 1000;
   }
   span {
-    width: 25px;
-    margin: 0 auto;
-    padding: 1px;
+    display: block;
+    width: 100%;
+    padding: 1px 0 1px 4px;
+    text-align: left;
+    box-sizing: border-box;
   }
 `;
 
@@ -199,10 +200,10 @@ const RowBox = styled.div`
 
 const IndicatorRow = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 2px;
-  margin: 2px auto;
+  margin: 2px 0 2px 4px;
 `;
 
 const Square = styled.div`
@@ -220,14 +221,13 @@ const XMarkColumn = styled.div`
 
 const XMark = styled.div<UserColor>`
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 1000;
   line-height: 8px;
   width: 10px;
   height: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  // 🎨 이름에 따라 색상 매칭
   color: ${(props) =>
     props.name === "수진" ? green : props.name === "지은" ? brown : "gray"};
 `;

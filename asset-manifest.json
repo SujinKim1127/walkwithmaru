@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/walkwithmaru/static/css/main.91344e97.css",
+    "main.js": "/walkwithmaru/static/js/main.8cd0a027.js",
+    "static/js/787.f93e22db.chunk.js": "/walkwithmaru/static/js/787.f93e22db.chunk.js",
+    "index.html": "/walkwithmaru/index.html",
+    "main.91344e97.css.map": "/walkwithmaru/static/css/main.91344e97.css.map",
+    "main.8cd0a027.js.map": "/walkwithmaru/static/js/main.8cd0a027.js.map",
+    "787.f93e22db.chunk.js.map": "/walkwithmaru/static/js/787.f93e22db.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.91344e97.css",
+    "static/js/main.8cd0a027.js"
+  ]
+}

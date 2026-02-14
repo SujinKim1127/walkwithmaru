@@ -55,7 +55,7 @@ const UnavailableDateRecorder = ({
 };
 
 const Container = styled.div`
-  margin: 12px auto;
+  margin: 0 auto 12px auto;
   width: 315px;
   display: flex;
   align-items: center;

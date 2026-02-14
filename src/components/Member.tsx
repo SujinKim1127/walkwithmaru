@@ -14,157 +14,121 @@ export interface SProps {
 const Member = ({ selectedDate }: SProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isTimeOpen, setIsTimeOpen] = useState(false);
-  const [username, setUserName] = useState("");
-  const [time, setTime] = useState(new Date());
   const [clickname, setClickname] = useState("");
 
   return (
     <Container>
-      <HeaderBox>
+      <Row>
         <TitleBox>담당자</TitleBox>
-        <PlusBox>
-          <Icon onClick={() => setIsOpen(true)} icon="ic:round-plus" />
-        </PlusBox>
-        <MemberModal isOpen={isOpen} setIsOpen={setIsOpen} />
-      </HeaderBox>
-      <MemberBox>
-        <UserBox>
-          <PersonalBox color={orange}>
-            <UserNametxt
-              onClick={() => {
-                setIsTimeOpen(true);
-                setClickname("태훈");
-              }}
-            >
-              태훈&nbsp;
-            </UserNametxt>
-            <UserPlusbtn>
-              <Icon
-                icon="ic:round-plus"
-                onClick={() => {
-                  setIsTimeOpen(true);
-                  setClickname("태훈");
-                }}
-              />
-            </UserPlusbtn>
+        <TagGroup>
+          <PersonalBox
+            color={orange}
+            onClick={() => {
+              setIsTimeOpen(true);
+              setClickname("태훈");
+            }}
+          >
+            <PlusCircle>+</PlusCircle>
+            태훈
           </PersonalBox>
-          <PersonalBox color={sky}>
-            <UserNametxt
-              onClick={() => {
-                setIsTimeOpen(true);
-                setClickname("유정");
-              }}
-            >
-              유정&nbsp;
-            </UserNametxt>
-            <UserPlusbtn>
-              <Icon
-                icon="ic:round-plus"
-                onClick={() => {
-                  setIsTimeOpen(true);
-                  setClickname("유정");
-                }}
-              />
-            </UserPlusbtn>
+          <PersonalBox
+            color={sky}
+            onClick={() => {
+              setIsTimeOpen(true);
+              setClickname("유정");
+            }}
+          >
+            <PlusCircle>+</PlusCircle>
+            유정
           </PersonalBox>
-          <PersonalBox color={brown}>
-            <UserNametxt
-              onClick={() => {
-                setIsTimeOpen(true);
-                setClickname("지은");
-              }}
-            >
-              지은&nbsp;
-            </UserNametxt>
-            <UserPlusbtn>
-              <Icon
-                icon="ic:round-plus"
-                onClick={() => {
-                  setIsTimeOpen(true);
-                  setClickname("지은");
-                }}
-              />
-            </UserPlusbtn>
+          <PersonalBox
+            color={brown}
+            onClick={() => {
+              setIsTimeOpen(true);
+              setClickname("지은");
+            }}
+          >
+            <PlusCircle>+</PlusCircle>
+            지은
           </PersonalBox>
-          <PersonalBox color={green}>
-            <UserNametxt
-              onClick={() => {
-                setIsTimeOpen(true);
-                setClickname("수진");
-              }}
-            >
-              수진&nbsp;
-            </UserNametxt>
-            <UserPlusbtn>
-              <Icon
-                icon="ic:round-plus"
-                onClick={() => {
-                  setIsTimeOpen(true);
-                  setClickname("수진");
-                }}
-              />
-            </UserPlusbtn>
+          <PersonalBox
+            color={green}
+            onClick={() => {
+              setIsTimeOpen(true);
+              setClickname("수진");
+            }}
+          >
+            <PlusCircle>+</PlusCircle>
+            수진
           </PersonalBox>
-          <TimeModal
-            selectedDate={selectedDate}
-            name={clickname}
-            isTimeOpen={isTimeOpen}
-            setIsTimeOpen={setIsTimeOpen}
-          />
-        </UserBox>
-      </MemberBox>
+        </TagGroup>
+      </Row>
+      <MemberModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <TimeModal
+        selectedDate={selectedDate}
+        name={clickname}
+        isTimeOpen={isTimeOpen}
+        setIsTimeOpen={setIsTimeOpen}
+      />
     </Container>
   );
 };
 
+// 🎨 부드러운 구분선 + 깔끔한 레이아웃
 const Container = styled.div`
   display: flex;
-  justify-content: center;
   width: 315px;
-  border-top: 1px solid black;
+  border-top: 1px solid #e5e5e5;
   margin: 0 auto;
   flex-direction: column;
+  padding-top: 14px;
 `;
 
-const HeaderBox = styled.div`
+// 📌 담당자 타이틀 + 태그를 한 줄로 배치
+const Row = styled.div`
   display: flex;
-  margin-right: auto;
-  margin-top: 20px;
+  align-items: center;
+  gap: 10px;
 `;
 
-const TitleBox = styled.div``;
+const TitleBox = styled.div`
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  white-space: nowrap;
+`;
 
-const PlusBox = styled.div`
+const TagGroup = styled.div`
   display: flex;
-  text-align: center;
-  margin: auto 0 auto 5px;
-  cursor: pointer;
+  flex-wrap: wrap;
+  gap: 6px;
 `;
 
-const MemberBox = styled.div`
-  margin-top: 16px;
-`;
-
-const UserBox = styled.div`
-  display: flex;
-`;
 const PersonalBox = styled.div`
-  width: 60px;
-  height: 32px;
-  border-radius: 10px;
-  margin-right: 10px;
+  padding: 4px 10px;
+  border-radius: 8px;
   display: flex;
+  align-items: center;
+  gap: 4px;
   background-color: ${(props) => (props.color ? props.color : "gray")};
-`;
-
-const UserNametxt = styled.div`
-  margin: auto 0 auto 7px;
-`;
-
-const UserPlusbtn = styled.div`
-  display: flex;
-  margin: auto 0;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
+`;
+
+const PlusCircle = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 14px;
+  border-radius: 50%;
+  background-color: transparent;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.6);
+  flex-shrink: 0;
+  margin-bottom: 2px;
 `;
 
 export default Member;

@@ -16,9 +16,6 @@ const TimeModal = ({
   setIsTimeOpen,
 }: TProps) => {
   const [morn, setMorn] = useState("morn");
-  const openModalHandler = () => {
-    setIsTimeOpen(!isTimeOpen);
-  };
 
   const onSubmit = async () => {
     await dbService.collection("days").add({
@@ -29,112 +26,72 @@ const TimeModal = ({
     setMorn("morn");
   };
 
+  if (!isTimeOpen) return null;
+
   return (
-    <ModalContainer>
-      {isTimeOpen ? (
-        <ModalBackdrop onClick={openModalHandler}>
-          <ModalView onClick={(e) => e.stopPropagation()}>
-            <ModalContent>
-              <TimeBox>
-                <div className="morn" onClick={() => setMorn("morn")}>
-                  아침
-                </div>
-                <div className="even" onClick={() => setMorn("even")}>
-                  저녁
-                </div>
-              </TimeBox>
-              <CheckBox>
-                <div onClick={() => setMorn("morn")}>
-                  {morn === "morn" ? "✔️" : ""}
-                </div>
-                <div onClick={() => setMorn("even")}>
-                  {morn === "even" ? "✔️" : ""}
-                </div>
-              </CheckBox>
-            </ModalContent>
-            <ModalBtns>
-              <button
-                className="cancel"
-                onClick={() => {
-                  setIsTimeOpen(!isTimeOpen);
-                  onSubmit();
-                }}
-              >
-                완료
-              </button>
-            </ModalBtns>
-          </ModalView>
-        </ModalBackdrop>
-      ) : null}
-    </ModalContainer>
+    <Backdrop onClick={() => setIsTimeOpen(false)}>
+      <Panel onClick={(e) => e.stopPropagation()}>
+        <Option $active={morn === "morn"} onClick={() => setMorn("morn")}>
+          아침
+        </Option>
+        <Divider />
+        <Option $active={morn === "even"} onClick={() => setMorn("even")}>
+          저녁
+        </Option>
+        <Divider />
+        <DoneButton
+          onClick={() => {
+            setIsTimeOpen(false);
+            onSubmit();
+          }}
+        >
+          완료
+        </DoneButton>
+      </Panel>
+    </Backdrop>
   );
 };
 
-const ModalContainer = styled.div``;
-
-const ModalBackdrop = styled.div`
-  background: rgba(0, 0, 0, 0.3);
+const Backdrop = styled.div`
   position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 `;
 
-const ModalView = styled.div`
-  width: 150px;
-  height: 110px;
-  background-color: white;
-  &.fail {
-    height: 120px;
-  }
+const Panel = styled.div`
+  width: 200px;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
 `;
 
-const ModalContent = styled.div`
-  display: flex;
-  justify-content: center;
-  font-size: 16px;
-  padding: 20px 0 10px 0;
-  margin: 0 20px;
-  &.fail {
-    border: none;
-  }
+const Option = styled.div<{ $active: boolean }>`
+  padding: 14px 0;
+  text-align: center;
+  font-size: 15px;
+  font-weight: ${({ $active }) => ($active ? 600 : 400)};
+  color: ${({ $active }) => ($active ? "#222" : "#999")};
+  background: ${({ $active }) => ($active ? "#f5f5f5" : "transparent")};
+  cursor: pointer;
 `;
 
-const TimeBox = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  div.morn {
-    margin-bottom: 10px;
-  }
+const Divider = styled.div`
+  height: 1px;
+  background: #eee;
+  margin: 0 16px;
 `;
 
-const CheckBox = styled.div`
-  margin-left: 5px;
-  div {
-    height: 16.82px;
-    margin-bottom: 10px;
-  }
-`;
-
-const ModalBtns = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-  button {
-    margin: 0 10px;
-    border: none;
-    font-size: 12px;
-    font-weight: 600;
-    &:hover {
-      cursor: pointer;
-    }
-    background-color: transparent;
-    color: #0085ff;
-  }
+const DoneButton = styled.div`
+  padding: 13px 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a90d9;
+  cursor: pointer;
 `;
 
 export default TimeModal;

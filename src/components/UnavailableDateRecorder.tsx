@@ -55,16 +55,19 @@ const UnavailableDateRecorder = ({
 };
 
 const Container = styled.div`
-  margin: 10px auto;
+  margin: 0 auto 12px auto;
   width: 315px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
+  padding: 10px 16px;
 `;
 
 const Label = styled.span`
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
+  color: #555;
   white-space: nowrap;
 `;
 
@@ -82,19 +85,10 @@ const RecordButton = styled.button<ButtonProps>`
   color: #000;
   border: none;
   border-radius: 10px;
-  padding: 6px 14px;
+  padding: 6px 16px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:active {
-    opacity: 0.6;
-  }
 `;
 
 export default UnavailableDateRecorder;

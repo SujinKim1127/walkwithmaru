@@ -67,7 +67,6 @@ const Row = styled.div`
   height: 32px;
 `;
 
-// 📦 아침/저녁 각 영역 (flex: 1로 반반)
 const Section = styled.div`
   flex: 1;
   display: flex;
@@ -93,14 +92,12 @@ const TimeLabel = styled.span<TimeLabelProps>`
   flex-shrink: 0;
 `;
 
-// 🏷️ 태그 목록
 const TagList = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
 `;
 
-// ⏐ 세로 구분선
 const Divider = styled.div`
   width: 1px;
   height: 20px;

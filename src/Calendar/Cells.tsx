@@ -11,7 +11,7 @@ import styled from "styled-components";
 import color from "../util/color";
 import { useEffect, useRef, useState } from "react";
 
-const { green, sky, purple, yellow, pink, brown } = color;
+const { green, sky, orange, brown } = color;
 
 interface UserColor {
   name: string;
@@ -200,6 +200,7 @@ const RowBox = styled.div`
 const IndicatorRow = styled.div`
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   gap: 2px;
   margin: 2px auto;
 `;
@@ -213,7 +214,7 @@ const Square = styled.div`
 const XMarkColumn = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1px;
 `;
 
@@ -226,8 +227,9 @@ const XMark = styled.div<UserColor>`
   display: flex;
   align-items: center;
   justify-content: center;
+  // 🎨 이름에 따라 색상 매칭
   color: ${(props) =>
-    props.name === "수진" ? yellow : props.name === "지은" ? brown : "gray"};
+    props.name === "수진" ? green : props.name === "지은" ? brown : "gray"};
 `;
 
 const Morning = styled.div<UserColor>`
@@ -236,9 +238,9 @@ const Morning = styled.div<UserColor>`
   height: 8px;
   background-color: ${(props) =>
     props.name === "수진"
-      ? yellow
+      ? green
       : props.name === "태훈"
-        ? green
+        ? orange
         : props.name === "유정"
           ? sky
           : props.name === "지은"
@@ -252,9 +254,9 @@ const Evening = styled.div<UserColor>`
   height: 8px;
   background-color: ${(props) =>
     props.name === "수진"
-      ? yellow
+      ? green
       : props.name === "태훈"
-        ? green
+        ? orange
         : props.name === "유정"
           ? sky
           : props.name === "지은"

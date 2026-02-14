@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { dbService } from "../firebase";
 import color from "../util/color";
 
-const { brown, yellow } = color;
+const { brown, green } = color;
 
 interface UnavailableDateRecorderProps {
   selectedDate: Date;
@@ -46,7 +46,7 @@ const UnavailableDateRecorder = ({
         <RecordButton bgColor={brown} onClick={() => handleToggle("지은")}>
           지은
         </RecordButton>
-        <RecordButton bgColor={yellow} onClick={() => handleToggle("수진")}>
+        <RecordButton bgColor={green} onClick={() => handleToggle("수진")}>
           수진
         </RecordButton>
       </ButtonGroup>

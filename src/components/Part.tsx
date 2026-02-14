@@ -1,15 +1,7 @@
 import styled from "styled-components";
-import { Icon } from "@iconify/react";
-import color from "../util/color";
 import { dbService } from "../firebase";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import PersonPart from "./PersonPart";
-
-const { green, sky, orange, brown } = color;
-
-interface UserColor {
-  name: string;
-}
 
 export interface DProps {
   selectedDate: Date;
@@ -52,6 +44,7 @@ const Part = ({ selectedDate }: DProps) => {
           );
         })}
       </MorningBox>
+      <Divider />
       <EveningBox>
         <EveningText>
           <TextBox>저녁</TextBox>
@@ -79,11 +72,14 @@ const Part = ({ selectedDate }: DProps) => {
 };
 
 const Container = styled.div`
-  margin: 0 auto 10px auto;
+  margin: 0 auto 12px auto;
   width: 315px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  background-color: #f7f7f8;
+  border-radius: 12px;
+  padding: 12px 16px;
+  gap: 4px;
 `;
 
 const TextBox = styled.div`
@@ -92,58 +88,58 @@ const TextBox = styled.div`
 
 const MorningBox = styled.div`
   display: flex;
-  height: 75px;
+  align-items: center;
+  min-height: 44px;
+  padding: 4px 0;
 `;
 
 const MorningText = styled.div`
   display: flex;
-  text-align: center;
-  width: 30px;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 24px;
+  background-color: #fff3e0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e68a00;
+  flex-shrink: 0;
 `;
 
 const MorningPartBox = styled.div`
-  margin: auto 0 auto 15px;
+  margin-left: 8px;
+`;
+
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: #e8e8e8;
 `;
 
 const EveningBox = styled.div`
   display: flex;
-  height: 75px;
+  align-items: center;
+  min-height: 44px;
+  padding: 4px 0;
 `;
 
 const EveningText = styled.div`
   display: flex;
-  text-align: center;
-  width: 30px;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 24px;
+  background-color: #e8eaf6;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5c6bc0;
+  flex-shrink: 0;
 `;
 
 const EveningPartBox = styled.div`
-  margin: auto 0 auto 15px;
-`;
-
-const UserBox = styled.div<UserColor>`
-  width: 60px;
-  height: 32px;
-  display: flex;
-  background-color: ${(props) =>
-    props.name === "수진"
-      ? green
-      : props.name === "태훈"
-        ? orange
-        : props.name === "유정"
-          ? sky
-          : props.name === "지은"
-            ? brown
-            : "gray"};
-  border-radius: 10px;
-`;
-
-const UserNametxt = styled.div`
-  margin: auto 0 auto 7px;
-`;
-
-const UserDeletebtn = styled.div`
-  display: flex;
-  margin: auto 0;
+  margin-left: 8px;
 `;
 
 export default Part;

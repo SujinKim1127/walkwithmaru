@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import { dbService } from "../firebase";
-import { useEffect, useRef, useState } from "react";
 import color from "../util/color";
 
 const { green, sky, orange, brown } = color;
@@ -23,25 +22,25 @@ export interface DProps {
 
 const PersonPart = ({ daytimedata }: DProps) => {
   const onDeleteClick = async () => {
-    const data = await dbService.doc(`days/${daytimedata.id}`).delete();
+    await dbService.doc(`days/${daytimedata.id}`).delete();
   };
 
   return (
-    <UserBox name={daytimedata.name}>
-      <UserNametxt onClick={onDeleteClick}>
-        {daytimedata.name}&nbsp;
-      </UserNametxt>
-      <UserDeletebtn>
-        <Icon onClick={onDeleteClick} icon="ic:round-close" />
-      </UserDeletebtn>
-    </UserBox>
+    <Tag name={daytimedata.name}>
+      <TagName>{daytimedata.name}</TagName>
+      <DeleteBtn onClick={onDeleteClick}>
+        <Icon icon="ic:round-close" width={12} />
+      </DeleteBtn>
+    </Tag>
   );
 };
 
-const UserBox = styled.div<UserColor>`
-  width: 60px;
-  height: 32px;
-  display: flex;
+const Tag = styled.div<UserColor>`
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 8px 4px 10px;
+  border-radius: 16px;
   background-color: ${(props) =>
     props.name === "수진"
       ? green
@@ -52,17 +51,27 @@ const UserBox = styled.div<UserColor>`
           : props.name === "지은"
             ? brown
             : "gray"};
-  border-radius: 10px;
 `;
 
-const UserNametxt = styled.div`
-  margin: auto 0 auto 7px;
+const TagName = styled.span`
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
 `;
 
-const UserDeletebtn = styled.div`
-  display: flex;
-  margin: auto 0;
+const DeleteBtn = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.35);
+  color: #000;
   cursor: pointer;
+  padding: 0;
+  margin-left: 4px;
 `;
 
 export default PersonPart;

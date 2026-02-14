@@ -5,7 +5,7 @@ import MemberModal from "./MemberModal";
 import { useState } from "react";
 import TimeModal from "./TimeModal";
 
-const { green, sky, purple, yellow, pink, brown } = color;
+const { green, sky, orange, brown } = color;
 
 export interface SProps {
   selectedDate: Date;
@@ -29,7 +29,7 @@ const Member = ({ selectedDate }: SProps) => {
       </HeaderBox>
       <MemberBox>
         <UserBox>
-          <PersonalBox color={green}>
+          <PersonalBox color={orange}>
             <UserNametxt
               onClick={() => {
                 setIsTimeOpen(true);
@@ -86,7 +86,7 @@ const Member = ({ selectedDate }: SProps) => {
               />
             </UserPlusbtn>
           </PersonalBox>
-          <PersonalBox color={yellow}>
+          <PersonalBox color={green}>
             <UserNametxt
               onClick={() => {
                 setIsTimeOpen(true);

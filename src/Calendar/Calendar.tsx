@@ -22,6 +22,7 @@ const Calendar = ({
     setSelectedDate(day);
   };
   const [schedule, setSchedule] = useState<any>([]);
+  const [unavailableData, setUnavailableData] = useState<any>([]);
 
   useEffect(() => {
     dbService.collection("days").onSnapshot((snapshot) => {
@@ -30,6 +31,16 @@ const Calendar = ({
         ...doc.data(),
       }));
       setSchedule(newArray);
+    });
+  }, []);
+
+  useEffect(() => {
+    dbService.collection("unavailable").onSnapshot((snapshot) => {
+      const newArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setUnavailableData(newArray);
     });
   }, []);
 
@@ -43,6 +54,7 @@ const Calendar = ({
           selectedDate={selectedDate}
           onDateClick={onDateClick}
           schedule={schedule}
+          unavailableData={unavailableData}
         />
       </WholeBox>
     </Container>

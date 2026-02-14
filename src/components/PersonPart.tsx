@@ -4,7 +4,7 @@ import { dbService } from "../firebase";
 import { useEffect, useRef, useState } from "react";
 import color from "../util/color";
 
-const { green, sky, purple, yellow, pink, brown } = color;
+const { green, sky, orange, brown } = color;
 
 interface UserColor {
   name: string;
@@ -44,12 +44,14 @@ const UserBox = styled.div<UserColor>`
   display: flex;
   background-color: ${(props) =>
     props.name === "수진"
-      ? yellow
-      : props.name === "태훈"
       ? green
-      : props.name === "유정"
-      ? sky
-      : brown};
+      : props.name === "태훈"
+        ? orange
+        : props.name === "유정"
+          ? sky
+          : props.name === "지은"
+            ? brown
+            : "gray"};
   border-radius: 10px;
 `;
 

@@ -15,7 +15,7 @@ const TimeModal = ({
   isTimeOpen,
   setIsTimeOpen,
 }: TProps) => {
-  const [morn, setMorn] = useState("morn");
+  const [morn, setMorn] = useState("even");
 
   const onSubmit = async () => {
     await dbService.collection("days").add({

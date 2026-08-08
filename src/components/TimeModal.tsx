@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { dbService } from "../firebase";
 
@@ -17,13 +17,19 @@ const TimeModal = ({
 }: TProps) => {
   const [morn, setMorn] = useState("even");
 
+  // 🌙 모달이 열릴 때마다 저녁을 기본값으로 초기화
+  useEffect(() => {
+    if (isTimeOpen) {
+      setMorn("even");
+    }
+  }, [isTimeOpen]);
+
   const onSubmit = async () => {
     await dbService.collection("days").add({
       name: name,
       time: morn,
       day: selectedDate.toDateString(),
     });
-    setMorn("morn");
   };
 
   if (!isTimeOpen) return null;

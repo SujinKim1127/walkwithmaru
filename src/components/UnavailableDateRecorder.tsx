@@ -60,6 +60,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 30px;
   gap: 12px;
   padding: 10px 16px;
 `;

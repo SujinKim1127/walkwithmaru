@@ -17,9 +17,9 @@ function App() {
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
       />
-      <UnavailableDateRecorder selectedDate={selectedDate} />
       <Part selectedDate={selectedDate} />
       <Member selectedDate={selectedDate} />
+      <UnavailableDateRecorder selectedDate={selectedDate} />
     </div>
   );
 }

@@ -78,7 +78,6 @@ const Member = ({ selectedDate }: SProps) => {
 const Container = styled.div`
   display: flex;
   width: 315px;
-  border-top: 1px solid #e5e5e5;
   margin: 0 auto;
   flex-direction: column;
   padding-top: 14px;

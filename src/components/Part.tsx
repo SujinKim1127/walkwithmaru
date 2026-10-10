@@ -58,7 +58,7 @@ const Part = ({ selectedDate }: DProps) => {
 const Container = styled.div`
   margin: 0 auto 12px auto;
   width: 315px;
-  padding: 10px 14px;
+  padding: 0 14px 10px 14px;
 `;
 
 const Row = styled.div`
